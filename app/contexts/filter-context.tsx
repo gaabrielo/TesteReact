@@ -38,7 +38,6 @@ interface FilterContextType {
   setSelectedCarModel: (value: string | null) => void;
   filteredProducts: ProductType[];
   allBrands: string[];
-  // Modelos filtrados pela marca selecionada
   availableCarModels: string[];
   isLoading: boolean;
 }
@@ -60,6 +59,10 @@ export function FilterProvider({ children }: { children: React.ReactNode }) {
         setProducts(data);
       } catch (error) {
         console.error('Failed to fetch products: ', error);
+
+        /*
+          Utilizei a lib react-hot-toast para notificar possiveis erros ao carregar os produtos
+        */
         toast.error('Não foi possível carregar os produtos. Tente novamente.');
       } finally {
         setIsLoading(false);

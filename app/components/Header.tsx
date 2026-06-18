@@ -1,11 +1,18 @@
 'use client';
 
+import Image from 'next/image';
+
+/*
+  Utilizei componentes do base-ui para criar o drawer do filtro e o combobox das marcas e modelos,
+  a lib é mantida pelos criadores do radix e recebe atualizações contínuas
+
+  Acho a lib excelente para criar componentes com estilizacao customizada e acessibilidade
+*/
 import { CarBrandCombobox } from '@/app/components/CarBrandCombobox';
 import { CarModelCombobox } from '@/app/components/CarModelCombobox';
+import { FilterDrawer } from '@/app/components/FilterDrawer';
 import { useFilter } from '@/app/contexts/filter-context';
-import { MagnifyingGlassIcon, FunnelIcon } from '@heroicons/react/16/solid';
-import Image from 'next/image';
-import toast from 'react-hot-toast';
+import { MagnifyingGlassIcon } from '@heroicons/react/16/solid';
 
 export function Header() {
   const { searchTerm, setSearchTerm } = useFilter();
@@ -54,16 +61,9 @@ export function Header() {
           <CarBrandCombobox />
           <CarModelCombobox />
         </div>
-        <button
-          onClick={() =>
-            toast.error(
-              'Não foi possível carregar os produtos. Tente novamente.',
-            )
-          }
-          className="not-sr-only xl:sr-only ml-2 rounded-full outline outline-1 -outline-offset-1 outline-gray-300 p-2 self-end active:bg-gray-50 active:outline-brand transition-all"
-        >
-          <FunnelIcon className="size-5 text-brand" />
-        </button>
+        <div className="not-sr-only xl:sr-only ml-2  self-end">
+          <FilterDrawer />
+        </div>
       </div>
     </header>
   );
